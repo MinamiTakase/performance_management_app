@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboad.css">
+
+    <title>業績管理WEBアプリ（Bootstrap version）</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-info mt-3 mb-3 sticky-top">
+        <a class="navbar-brand" type="button" href="index.html">業績管理WEBアプリ</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="dashboad.html">ダッシュボード</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="team.html">チーム別</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.html">店舗別</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="master.html">マスタ</a>
+                </li>
+            </ul>
+        </div>
+        <div class="justify-content-end">
+            <p class="mb-0">ログインユーザー 高瀬未菜美</p>
+        </div>
+    </nav>
+
+
+
+    <main>
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+            <!--画面左半分-->
+                <div class="screen_left col-3 d-flex flex-row flex-wrap align-content-start">
+                    <!--左上選択欄-->
+                    <div class="form_all mb-3">
+                        <h1>全体</h1>
+                        <form action="" name="form_all">
+                            <!--以下の箇所は年月を自動で増やしたり減らしたりしたい。基本は当期がデフォルト-->
+                            <select name="year" id="year">
+                                <option value="2022-01-01">2022年度</option>
+                                <option value="2021-01-01">2021年度</option>
+                                <option value="2020-01-01">2020年度</option>
+                            </select>
+                            <!--上記の期に合わせてvalueが変更になるイメージ-->
+                            <select name="month" id="month">
+                                <option value="2022-10-01">2022年10月</option>
+                                <option value="2022-11-01">2022年11月</option>
+                                <option value="2022-12-01">2022年12月</option>
+                            </select>
+                            <button type="submit">表示</button>
+                        </form>
+                    </div>
+
+                    <!--左下KPI表示-->
+                    <div class="d-flex flex-row flex-wrap  text-center">
+                        <div class="bg-dark text-light col-6 pb-2">
+                            <p class="mb-0 mt-2">粗利</p>
+                            <p class="mb-0 font-weight-bold value_kpi">98.6%</p>
+                        </div>
+                        <div class="bg-dark text-light col-6 pb-2">
+                            <p class="mb-0 mt-2">売上</p>
+                            <p class="mb-0 font-weight-bold value_kpi">92.1%</p>
+                        </div>
+                        <div class="bg-secondary text-light col-6 mb-3 pb-2">
+                            <p class="mb-0">計画　20,000,000円</p>
+                            <p class="mb-0">実績　18,000,000円</p>
+                        </div>
+                        <div class="bg-secondary text-light col-6 mb-3 pb-2">
+                            <p class="mb-0">計画　20,000,000円</p>
+                            <p class="mb-0">実績　18,000,000円</p>
+                        </div>
+                        <div class="bg-dark text-light col-6 mb-3 pb-2">
+                            <p class="mb-0 mt-2">体験</p>
+                            <p class="mb-0 font-weight-bold value_kpi">600</p>
+                            <p class="mb-0 value_bg">/650</p>
+                            
+                        </div>
+                        <div class="bg-dark text-light col-6 mb-3 pb-2">
+                            <p class="mb-0 mt-2">契約</p>
+                            <p class="mb-0 font-weight-bold value_kpi">600</p>
+                            <p class="mb-0 value_bg">/650</p>
+                        </div>            
+                        <div class="bg-dark text-light col-6 mb-3 pb-2">
+                            <p class="mb-0 mt-2">稼働人数</p>
+                            <p class="mb-0 font-weight-bold value_kpi">12000</p>
+                            <p class="mb-0 value_bg">/15000</p>
+                        </div>
+                        <div class="bg-dark text-light col-6 mb-3 pb-2">
+                            <p class="mb-0 mt-2">延べ利用人数</p>
+                            <p class="mb-0 font-weight-bold value_kpi pb-2">50000</p>
+                            <p class="mb-0 value_bg">/55000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--右上チーム明細-->
+                <div class="screen_right col-6">     
+                    <div class="mb-5">
+                        <h1>チーム別</h1>
+                        <table class="table table-striped table-sm text-right team_tb">
+                            <tr>
+                                <th></th><th>粗利計画</th><th>粗利実績</th><th>達成率</th><th>売上計画</th><th>売上実績</th><th class="text-center">達成率</th>
+                            </tr>
+                            <tr>
+                                <th>A</th><td>2,500,000</td><td>2,300,000</td><td>90.0%</td><td>5,000,000</td><td>4,000,000</td><td>80.0％</td>
+                            </tr>
+                            <tr>
+                                <th>B</th><td>2,500,000</td><td>2,300,000</td><td>90.0%</td><td>5,000,000</td><td>4,000,000</td><td>80.0％</td>
+                            </tr>
+                            <tr>
+                                <th>C</th><td>2,500,000</td><td>2,300,000</td><td>90.0%</td><td>5,000,000</td><td>4,000,000</td><td>80.0％</td>
+                            </tr>
+                            <tr>
+                                <th>D</th><td>2,500,000</td><td>2,300,000</td><td>90.0%</td><td>5,000,000</td><td>4,000,000</td><td>80.0％</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--右下ランキング-->
+                    <div>
+                        <h1>ランキング</h1>
+                        <table class="table table-striped table-sm text-center">
+                            <tr>
+                                <th></th><th colspan="2">体験</th><th colspan="2">契約</th><th colspan="2">稼働人数</th><th colspan="2" >延べ利用</th>
+                            </tr>
+                            <tr>
+                                <th>1</th><td>札幌中央</td><td>19</td><td>山口西</td><td>17</td><td>和歌山中央</td><td>204</td><td>鹿児島南</td><td>1360</td>
+                            </tr>
+                            <tr>
+                                <th>2</th><td>札幌中央</td><td>19</td><td>山口西</td><td>17</td><td>和歌山中央</td><td>204</td><td>鹿児島南</td><td>1360</td>
+                            </tr>
+                            <tr>
+                                <th>3</th><td>札幌中央</td><td>19</td><td>山口西</td><td>17</td><td>和歌山中央</td><td>204</td><td>鹿児島南</td><td>1360</td>
+                            </tr>
+                            <tr>
+                                <th>4</th><td>札幌中央</td><td>19</td><td>山口西</td><td>17</td><td>和歌山中央</td><td>204</td><td>鹿児島南</td><td>1360</td>
+                            </tr>
+                            <tr>
+                                <th>5</th><td>札幌中央</td><td>19</td><td>山口西</td><td>17</td><td>和歌山中央</td><td>204</td><td>鹿児島南</td><td>1360</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                        
+                </div>   
+            </div>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

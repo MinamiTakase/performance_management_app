@@ -1,0 +1,14 @@
+/*ユーザー新規登録・使用停止マスタ*/
+.user_master{
+    width: 35%;
+    margin: 50px auto 0 auto;
+}
+.userm_tytle{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.userm_status_lavel{
+    font-size: 1rem;
+    padding-right: 50px;
+}

@@ -1,0 +1,8 @@
+p{
+    font-size: 1rem;
+}
+
+.user_table{
+    height: 400px; /*高さを％で指定する方法がわからない。*/
+    overflow: auto;
+}
