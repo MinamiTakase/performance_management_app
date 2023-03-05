@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.TeamMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_team">
+		select * from TRN_team order by team_id
+	</select>
+	
+	<select id="findOne" resultType="com.app.domain.TRN_team">
+		select * from TRN_team where team_id= #{team_id}
+	</select>
+
+	<select id="findTeam" resultType="com.app.domain.TRN_team">
+		select * from TRN_team 
+			where team_status = #{team_status}
+			order by team_name
+			limit 1
+	</select>
+
+		
+	<select id="outputTeamList" resultType="com.app.domain.TRN_team">
+		select * from TRN_team 
+			where team_status = #{team_status}
+			order by team_name
+	</select>
+	
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="team_id">
+		insert into TRN_team(team_name, team_start_date, team_end_date,team_status, author, creation_date) 
+			values(#{team_name}, #{team_start_date},#{team_end_date},#{team_status},#{author}, #{creation_date})
+	</insert>
+	
+	<update id="update">
+		update TRN_team 
+			set team_name=#{name}, team_start_date=#{team_start_date}, team_end_date=#{team_end_date},
+			team_status=#{team_status}, updater=#{updater}, updated_date=#{updated_date}, deletion_flag=#{deletion_flag}
+		where team_id= #{team_id}
+	</update>
+	
+	<delete id="delete">
+		delete from TRN_team where team_id = #{team_id}
+	</delete>
+</mapper>

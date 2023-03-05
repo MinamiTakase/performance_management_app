@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.ShopMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_shop">
+		select shop.*,trn_rep.rep_name from TRN_shop as shop
+			left join (
+				select repas.rep_id, repas.shop_id 
+					from trn_rep_assigning as repas
+				 	join (
+						select shop_id, max(start_month_id) 
+			 			from TRN_rep_assigning repas2
+						GROUP by repas2.shop_id
+					) as max
+				on repas.shop_id = max.shop_id
+				and repas.start_month_id = max.max
+			) as rep_assigning
+			on shop.shop_id = rep_assigning.shop_id
+		join trn_rep on rep_assigning.rep_id = trn_rep.rep_id	
+		order by shop.shop_id desc
+	</select>
+	
+	<select id="findOne" resultType="com.app.domain.TRN_shop">
+		select * from TRN_shop where shop_id= #{shop_id}
+	</select>
+
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="shop_id">
+		insert into TRN_shop(shop_id, shop_name, open_date, close_date, promotion_key, shop_status, author, creation_date) 
+			values(#{shop_id}, #{shop_name}, #{open_date},#{close_date},#{promotion_key},#{shop_status},'SYSTEM', current_timestamp)
+	</insert>
+	
+	<update id="update">
+		update TRN_shop 
+			set shop_name=#{shop_name}, open_date=#{open_date}, close_date=#{close_date}, promotion_key=#{promotion_key}, 
+				shop_status =#{shop_status}  
+			where shop_id= #{shop_id}
+	</update>
+	
+	<delete id="delete">
+		delete from TRN_shop where shop_id = #{shop_id}
+	</delete>
+</mapper>

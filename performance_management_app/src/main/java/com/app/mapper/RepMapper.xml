@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.RepMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_rep">
+		select * from TRN_rep order by rep_id
+	</select>
+	
+	<select id="findOne" resultType="com.app.domain.TRN_rep">
+		select * from TRN_rep where rep_id= #{rep_id}
+	</select>
+	<select id="outputRepList" resultType="com.app.domain.TRN_rep">
+		select * from TRN_rep 
+			join TRN_team_assigning on TRN_rep.rep_id = TRN_team_assigning.rep_id
+			where TRN_rep.rep_status = #{rep_status}
+				and TRN_team_assigning.team_id = #{team_id}
+			order by TRN_rep.rep_id
+	</select>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="rep_id">
+		insert into TRN_rep(rep_name, user_id, start_date, rep_status, author, creation_date) 
+			values(#{name}, #{user_id}, #{start_date}, #{rep_status} ,#{author}, #{creation_date})
+	</insert>
+	
+	<update id="update">
+		update TRN_rep 
+			set rep_name=#{name}, user_id=#{user_id}, start_date=#{start_date}, rep_status=#{rep_status},
+			updater=#{updater}, updated_date=#{updated_date}, deletion_flag=#{deletion_flag}   
+		where rep_id= #{rep_id}
+	</update>
+	
+	<delete id="delete">
+		delete from TRN_rep where rep_id = #{rep_id}
+	</delete>
+</mapper>

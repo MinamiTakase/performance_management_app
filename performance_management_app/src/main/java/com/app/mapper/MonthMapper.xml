@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.MonthMapper">
+	<select id="findAll" resultType="com.app.domain.MST_month">
+		select * from MST_month order by month_id desc
+	</select>
+	
+	<!-- 期からmonthデータを絞り込み -->
+	<select id="findMonthByPeriod" resultType="com.app.domain.MST_month">
+		select * from MST_month 
+			where month_period= #{month_period} and month_id &lt;= #{today}
+			order by month_id desc
+	</select>
+	
+	<!-- 今以前の期を絞り込み -->
+	<select id="findPeriod" resultType="Integer">
+		<![CDATA[
+		select month_period from MST_month
+			where month_id <= #{today_id}
+			group by month_period
+			order by month_period desc
+		]]>
+	</select>
+	
+	<!-- idから該当のmonthデータを取り出す -->
+	<select id="findMonthById" resultType="com.app.domain.MST_month">
+		select * from MST_month where month_id= #{month_id}
+	</select>
+	
+	
+	
+</mapper>

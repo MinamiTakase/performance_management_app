@@ -19,6 +19,7 @@ public class LoginController {
     UserService service;
 
     @GetMapping
+    //以下の引数が邪魔している気もしたが、削除しても特に何も変わらず
     public String loginGet(@ModelAttribute("user") MST_User user) {
         return "login";
     }
@@ -28,13 +29,13 @@ public class LoginController {
 
         MST_User loginUser = service.findOne(user.getUser_address());
         // モデルのパスワードと、loginUserのパスワードが一致した場合
-        if (loginUser.getUser_password().equals(user.getUser_password())) {
+        if (loginUser.getPassword().equals(user.getPassword())) {
         } else {
             model.addAttribute("msg", "メールアドレスまたはパスワードが不正です。");
             return "login";
         }
         // ログイン直後のURLがloginのままになってしまうので、redirectにしたほうがよいかも？
-        return "dashboad";
+        return "redirect:/dashboad";
     }
 
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.ShopAchievementMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_shop_achievement">
+		select * from TRN_shop_achievement 
+			order by month_id,shop_id
+	</select>
+	
+	<select id="findAchievement" resultType="com.app.domain.TRN_shop_achievement">
+		select * from TRN_shop_achievement where month_id= #{month_id}
+	</select>
+	
+	<select id="findAchievementByTeam" resultType="com.app.domain.TRN_shop_achievement">
+		select * from TRN_shop_achievement
+			join TRN_rep_assigning on TRN_rep_assigning.shop_id = TRN_shop_achievement.shop_id
+			join TRN_team_assigning on TRN_team_assigning.rep_id = TRN_rep_assigning.rep_id
+			where TRN_shop_achievement.month_id= #{month_id}
+				and TRN_team_assigning.team_id = #{team_id}
+	</select>
+
+	<select id="findAchievementByRep" resultType="com.app.domain.TRN_shop_achievement">
+		select * from TRN_shop_achievement
+			join TRN_rep_assigning on TRN_rep_assigning.shop_id = TRN_shop_achievement.shop_id
+			join TRN_team_assigning on TRN_team_assigning.rep_id = TRN_rep_assigning.rep_id
+			where TRN_shop_achievement.month_id= #{month_id}
+				and TRN_team_assigning.rep_id = #{rep_id}
+	</select>
+	
+	<select id="findShopRank" resultType="com.app.domain.TRN_shop_achievement">
+			select subtable.*, trn_shop.shop_name FROM
+			(select 
+			 	shop_id, ${item}, month_id,	RANK() OVER(ORDER BY ${item} DESC) as rank
+			from trn_shop_achievement
+			where month_id= #{month_id}) 
+			as subtable
+		join trn_shop on trn_shop.shop_id = subtable.shop_id
+			where rank &lt;= 5
+		order by ${item} desc
+	</select>
+
+
+</mapper>

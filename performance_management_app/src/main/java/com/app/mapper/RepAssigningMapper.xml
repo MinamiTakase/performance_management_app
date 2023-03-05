@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.RepAssigningMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_rep_assigning">
+		select * from TRN_rep_assigning order by start_month_id desc
+	</select>
+	
+	<select id="findNewOne" resultType="com.app.domain.TRN_rep_assigning">
+		select * from TRN_rep_assigning
+			where shop_id = #{shop_id}
+			order by start_month_id desc
+			limit 1
+	</select>
+	
+	<insert id="save">
+		insert into TRN_rep_assigning(rep_id, shop_id, start_month_id, rep_assigning_status, author, creation_date)
+			values(#{rep_id}, #{shop_id}, #{start_month_id}, #{rep_assigning_status},'SYSTEM', current_timestamp)
+	</insert>
+	
+	<!-- これ、もしかしてdeletionfragを立てるだけのほうがよい？ -->
+	<delete id="delete">
+		delete from TRN_rep_assigning
+			where shop_id = #{shop_id}
+			and start_month_id = #{start_month_id}
+	</delete>
+</mapper>

@@ -6,24 +6,21 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class User {
-
-    @NotBlank
-    private Integer user_id;
-
-    @NotBlank
-    private String user_password;
-
-    @NotBlank
-    private String user_name;
-
-    @NotBlank
-    public String user_address;
-
-    @NotBlank
-    private String user_type;
-
-    @NotBlank
+public class TRN_team {
+	@NotBlank
+	private Integer team_id;
+	
+	@NotBlank
+	private String team_name;
+	
+	@NotBlank
+	private Date team_start_date;
+	
+	private Date team_end_date;
+	
+	private String team_status;
+	
+	@NotBlank
     private String author;
 
     @NotBlank

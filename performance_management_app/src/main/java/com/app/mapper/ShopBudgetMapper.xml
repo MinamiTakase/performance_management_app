@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.ShopBudgetMapper">
+	<select id="findAll" resultType="com.app.domain.TRN_shop_budget">
+		select * from TRN_shop_budget order by month_id,shop_id
+	</select>
+	
+	<select id="findBudget" resultType="com.app.domain.TRN_shop_budget">
+		select * from TRN_shop_budget where month_id= #{month_id}
+	</select>
+	
+	<select id="findBudgetByTeam" resultType="com.app.domain.TRN_shop_budget">
+		select * from TRN_shop_budget
+			join TRN_rep_assigning on TRN_rep_assigning.shop_id = TRN_shop_budget.shop_id
+			join TRN_team_assigning on TRN_team_assigning.rep_id = TRN_rep_assigning.rep_id
+			where TRN_shop_budget.month_id= #{month_id}
+				and TRN_team_assigning.team_id = #{team_id}
+	</select>
+		
+	<select id="findBudgetByRep" resultType="com.app.domain.TRN_shop_budget">
+		select * from TRN_shop_budget
+			join TRN_rep_assigning on TRN_rep_assigning.shop_id = TRN_shop_budget.shop_id
+			join TRN_team_assigning on TRN_team_assigning.rep_id = TRN_rep_assigning.rep_id
+			where TRN_shop_budget.month_id= #{month_id}
+				and TRN_team_assigning.rep_id = #{rep_id}
+	</select>
+
+</mapper>
