@@ -35,7 +35,7 @@ public class LoginUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return loginUserForm.getUsername(); //書き換え
+        return loginUserForm.getUser_address(); //書き換え
     }
 
     @Override

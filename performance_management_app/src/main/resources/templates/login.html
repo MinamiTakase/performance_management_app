@@ -21,7 +21,7 @@
             </div>
             <p th:if="${msg}" th:text="${msg}" style="color: red;">
             <div  class="login_form_btn form-group" th:object="${user}">
-                <p><input type="email" th:field="*{user_address}" placeholder="メールアドレス" class="form-control"></p>
+                <p><input type="email" th:field="*{username}" placeholder="メールアドレス" class="form-control"></p>
                 <p><input type="password" th:field="*{password}" placeholder="パスワード"  class="form-control"></p>
                 <input type="submit" class="btn btn-dark" value="ログイン">
             </div>
